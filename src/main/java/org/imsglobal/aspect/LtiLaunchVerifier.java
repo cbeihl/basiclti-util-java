@@ -48,7 +48,7 @@ public class LtiLaunchVerifier {
 
         Boolean ltiVerificationResultExists = false;
         //This array will hold the arguments to the join point, so we can pass them along to the advised function.
-        List<Object> args = new ArrayList<>(pjp.getArgs().length);
+        List<Object> args = new ArrayList<Object>(pjp.getArgs().length);
         for (Object arg : pjp.getArgs()) {
             if (arg != null && arg.getClass().equals(LtiVerificationResult.class)) {
                 args.add(ltiResult);

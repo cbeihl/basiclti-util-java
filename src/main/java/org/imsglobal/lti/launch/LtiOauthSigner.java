@@ -56,7 +56,13 @@ public class LtiOauthSigner implements LtiSigner {
             signer.setAdditionalParameters(params);
 
             signer.sign(request);
-        } catch (OAuthMessageSignerException|OAuthExpectationFailedException|OAuthCommunicationException|IOException e) {
+        } catch (OAuthMessageSignerException e) {
+            throw new LtiSigningException("Exception encountered while singing Lti request...", e);
+        } catch (OAuthExpectationFailedException e) {
+            throw new LtiSigningException("Exception encountered while singing Lti request...", e);
+        } catch (OAuthCommunicationException e) {
+            throw new LtiSigningException("Exception encountered while singing Lti request...", e);
+        } catch (IOException e) {
             throw new LtiSigningException("Exception encountered while singing Lti request...", e);
         }
         return request;
@@ -70,12 +76,16 @@ public class LtiOauthSigner implements LtiSigner {
         try {
             oam.addRequiredParameters(acc);
 
-            Map<String, String> signedParameters = new HashMap<>();
+            Map<String, String> signedParameters = new HashMap<String, String>();
             for(Map.Entry<String, String> param : oam.getParameters()){
                 signedParameters.put(param.getKey(), param.getValue());
             }
             return signedParameters;
-        } catch (OAuthException |IOException |URISyntaxException e) {
+        } catch (OAuthException e) {
+            throw new LtiSigningException("Error signing LTI request.", e);
+        } catch (IOException e) {
+            throw new LtiSigningException("Error signing LTI request.", e);
+        } catch (URISyntaxException e) {
             throw new LtiSigningException("Error signing LTI request.", e);
         }
     }

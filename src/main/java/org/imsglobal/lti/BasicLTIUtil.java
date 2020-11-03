@@ -135,7 +135,9 @@ public class BasicLTIUtil {
         String base_string = null;
         try {
             base_string = OAuthSignatureMethod.getBaseString(oam);
-        } catch (IOException|URISyntaxException e) {
+        } catch (IOException e) {
+            return new LtiVerificationResult(false, LtiError.BAD_REQUEST, "Unable to find base string");
+        } catch (URISyntaxException e) {
             return new LtiVerificationResult(false, LtiError.BAD_REQUEST, "Unable to find base string");
         }
 

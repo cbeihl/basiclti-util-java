@@ -49,7 +49,7 @@ public abstract class BaseMockHttpServletRequest implements HttpServletRequest {
 
     @Override
     public Enumeration getHeaders(String name) {
-        List<String> headerStrs = new ArrayList<>();
+        List<String> headerStrs = new ArrayList<String>();
         for(Header hdr: Arrays.asList(req.getHeaders(name))){
             headerStrs.add(hdr.getValue());
         }
@@ -58,7 +58,7 @@ public abstract class BaseMockHttpServletRequest implements HttpServletRequest {
 
     @Override
     public Enumeration getHeaderNames() {
-        List<String> headerNames = new LinkedList<>();
+        List<String> headerNames = new LinkedList<String>();
         for(Header hdr: req.getAllHeaders()) {
             headerNames.add(hdr.getName());
         }

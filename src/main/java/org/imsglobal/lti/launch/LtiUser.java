@@ -15,7 +15,7 @@ public class LtiUser {
 
     public LtiUser(HttpServletRequest request) {
         this.id = request.getParameter("user_id");
-        this.roles = new LinkedList<>();
+        this.roles = new LinkedList<String>();
         if(request.getParameter("roles") != null) {
             for (String role : request.getParameter("roles").split(",")) {
                 this.roles.add(role.trim());
@@ -25,7 +25,7 @@ public class LtiUser {
 
     public LtiUser(Map<String, String> parameters) {
         this.id = parameters.get("user_id");
-        this.roles = new LinkedList<>();
+        this.roles = new LinkedList<String>();
         if(parameters.get("roles") != null) {
             for (String role : parameters.get("roles").split(",")) {
                 this.roles.add(role.trim());
